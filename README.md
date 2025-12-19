@@ -7,7 +7,6 @@ Documentation site for Behaviour Discounts, intended to be published with GitHub
 - `_config.yml` — Jekyll configuration and theme settings.
 - `index.md` — landing page with quick-start guidance.
 - `guides/` — step-by-step setup, configuration, and rollout guides.
-- `reference/` — data model, FAQ, and other reusable definitions.
 
 ## Running locally (optional)
 

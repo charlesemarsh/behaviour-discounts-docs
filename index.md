@@ -23,9 +23,6 @@ Behaviour Discounts helps you offer dynamic incentives based on what customers a
   - [Getting started](guides/getting-started.md)
   - [Configuring rules](guides/configuration.md)
   - [Rolling out safely](guides/rollout.md)
-- Reference: precise definitions and reusable snippets.
-  - [Data model](reference/data-model.md)
-  - [FAQ](reference/faq.md)
 - Operational pages:
   - [Privacy](privacy.md)
   - [Contact](contact.md)
