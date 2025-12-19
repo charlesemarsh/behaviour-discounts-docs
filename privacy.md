@@ -1,52 +1,65 @@
 ---
 layout: default
-title: Privacy
+title: Privacy & Data Usage
 nav_order: 4
 ---
 
-# Privacy
+# Privacy & Data Usage
 
-This page explains how Behaviour Discounts handles data for the product and this documentation site. It is not legal advice—adapt it to your policies and jurisdictional requirements.
+How Behaviour Discounts handles merchant and shopper data. Adapt this to your own policies and jurisdictional requirements.
 
-## What we collect
+## Data we store (app backend)
 
-- **Product events you send:** Behaviour and commerce events (e.g., cart viewed, checkout started, order completed) with related attributes you choose to include (cart value, items, coupon usage, geo, device, loyalty tier).  
-- **Identifiers:** User and session identifiers you provide (e.g., user ID, email, device ID, session ID) to evaluate eligibility and issue discounts.  
-- **Discount records:** Issued codes, validity windows, redemption status, and the rule that generated them.  
-- **Logs and metrics:** Operational logs and aggregate metrics (trigger volume, redemption rates, error logs) for monitoring and debugging.  
-- **Documentation site:** This site is static and does not set cookies. Standard web server logs (IP address, user agent, referrer) may be retained briefly for security and reliability.
+- **Magic links:** Param/value pairs, linked discount, popup settings, and campaign metadata (stored via Prisma).  
+- **Behavioural triggers:** Rule type (product view, time-on-site/time-on-page), thresholds, popup copy, linked discount, and state.  
+- **Discount metadata:** Benefit type, gifts, param/value, and options stored in a Shopify Function configuration metafield.  
+- **Billing:** Plan selection (Free, Starter, Business, Enterprise) and Shopify billing identifiers.  
+- **Operational logs:** Service and error logs for debugging; no sale of data.
 
-## How data is used
+## Data read/written client-side
 
-- Evaluate rules and guardrails to decide when a discount should be issued.
-- Deliver and track discounts (issue, apply, redeem) and prevent abuse (stacking, excessive redemptions).
-- Monitor performance (conversion, AOV, margin impact) and reliability (error rates, latency).
-- Improve the product through aggregated, de-identified analytics when possible.
+- **Cookies/session:** `magic_link_discount` cookie plus a sessionStorage mirror to keep the active campaign.  
+- **Cart attributes:** `magic_link_campaign` or `behaviour_trigger_campaign` written before checkout to tell the Function which discount to apply.  
+- **Free gifts:** Gift variants tagged `_gift_campaign` may be auto-added to cart when configured.
 
-## Data sharing
+## Shopper telemetry
 
-- We do not sell or rent data.
-- Data is only shared with subprocessors needed to operate the service (e.g., email/SMS delivery, infrastructure, observability). Keep an internal register of any vendors you configure.
-- Access to production data is restricted to authorized personnel for support and operations.
+- URL query params to detect magic link activation.  
+- Product view events (to trigger popups) and time-on-site/time-on-page thresholds.  
+- Popup accepts/dismissals tied to campaigns (for activation only; impression/accept metrics are planned but not yet implemented).
 
-## Security
+## API tokens and access
 
-- Transport encryption (HTTPS/TLS) is required for all event and management traffic.
-- Apply least-privilege access controls for operators and automation.
-- Regularly review audit logs for rule changes, access, and discount issuance.
+- Uses an offline Admin API token to hydrate discounts and read/write metafields.  
+- Access is limited to the scopes granted during install; rotation follows Shopify app best practices.
+
+## Data sharing and processors
+
+- Shopify acts as the primary data processor; additional subprocessors are limited to infrastructure/monitoring providers.  
+- No data is sold or rented. Production access is restricted to authorized personnel for support and operations.
 
 ## Retention and deletion
 
-- Keep event and issuance data only as long as needed to operate rules, monitor impact, and meet audit requirements.
-- Set retention periods for logs and backups; expire old issued codes where supported.
-- Respond to deletion requests for identifiable data in accordance with your legal obligations.
+- Configurations and metafields are kept while the app is installed.  
+- Logs are retained for operational needs and rotated on a standard schedule.  
+- Upon uninstall or request, stored configurations and related metafields can be removed; submit deletion requests via support.
 
-## Your responsibilities
+## Your obligations (merchants)
 
-- Ensure you have a lawful basis to send personal data (consent, contract, legitimate interest).
-- Avoid sending sensitive personal data unless necessary and permitted.
-- Update this policy to reflect your actual data flows, subprocessors, and applicable regulations (GDPR, CCPA, etc.).
+- Ensure you have a lawful basis to process personal data (e.g., consent, contract, legitimate interest).  
+- Avoid sending sensitive personal data through campaign params or triggers.  
+- Update this notice to reflect your own data flows, vendors, and applicable regulations (GDPR, CCPA).
 
-## Contact
+## Rights
 
-Questions or requests about privacy? See [Contact](contact.md) for how to reach us.
+- We will assist with access, correction, or deletion requests for data we control, subject to verification.  
+- Shoppers should contact the merchant first; merchants can relay requests to us.
+
+## Security
+
+- Transport encryption (HTTPS/TLS) is required for admin and storefront calls.  
+- Principle of least privilege for operator access; audit access and discount changes periodically.
+
+## Need help?
+
+Privacy or data questions? Email `support@example.com` with your shop domain and the campaign/trigger in question.

@@ -18,6 +18,7 @@ Behaviour Discounts helps you offer dynamic incentives based on what customers a
 
 ## Documentation map
 
+- [Merchant help](help.md): storefront setup, magic links, triggers, gifts, testing, and troubleshooting.
 - Guides: start-to-finish flows for setting up Behaviour Discounts.
   - [Getting started](guides/getting-started.md)
   - [Configuring rules](guides/configuration.md)
