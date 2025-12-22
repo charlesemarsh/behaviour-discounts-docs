@@ -6,7 +6,7 @@ nav_order: 5
 
 # Contact
 
-Use this form to reach the Behaviour Discounts team. The example below works on GitHub Pages by posting to a form service (e.g., Formspree); swap in your own endpoint.
+Use this form to reach the Behaviour Discounts team.
 
 <form action="https://formspree.io/f/xykgnwap" method="POST">
   <div class="fs-row">
