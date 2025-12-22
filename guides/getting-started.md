@@ -5,62 +5,230 @@ parent: Guides
 nav_order: 1
 ---
 
-# Getting started
+# Getting Started with Behaviour Discounts
 
-Use this guide to stand up Behaviour Discounts with a minimal, testable rule set.
+Welcome to Behaviour Discounts! This guide will help you create your first campaigns and start rewarding customer behavior on your Shopify store.
 
-## Prerequisites
+## What is Behaviour Discounts?
 
-- You can emit or ingest user events (e.g., web tracking, backend event bus, or CRM exports).
-- You know how discounts should be applied in your commerce stack (promo codes, cart price rules, coupons, or wallet credits).
-- Access to a non-production environment to validate rules before launch.
+Behaviour Discounts is a Shopify app that lets you create dynamic discount campaigns that respond to how customers interact with your store. You can trigger discounts based on browsing behavior, show personalized popups, and create unique discount links for marketing campaigns.
 
-## 1) Pick the journey to influence
+## Two Ways to Create Discounts
 
-- Start with a single journey to keep scope tight:
-  - First purchase completion
-  - Abandoned cart recovery
-  - Second/third purchase retention
-  - Replenishment reminder
-- Write down the success metric and guardrails (e.g., margin floor, max redemptions/day, geo restrictions).
+### 1. Behavioural Triggers
 
-## 2) Map events and attributes
+Behavioural triggers automatically activate discounts when customers perform specific actions on your store, such as:
 
-Identify the signals you can observe and how they map to the journey.
+- Viewing multiple products
+- Spending time on your site
+- Abandoning checkout
+- Showing exit intent
+- Being a returning visitor
+- And more...
 
-| Event | Required attributes | Example use |
-| ----- | ------------------- | ----------- |
-| `cart_viewed` | `cart_value`, `items`, `session_id` | Size offers by basket value |
-| `checkout_started` | `cart_value`, `coupon_used`, `shipping_country` | Avoid stacking with existing promos |
-| `order_completed` | `order_value`, `order_id`, `loyalty_tier` | Trigger post-purchase rewards |
+**Best for:** Organic traffic, on-site engagement, reducing cart abandonment
 
-## 3) Define a first rule
+### 2. Magic Links
 
-Keep it simple to validate end-to-end wiring:
+Magic Links are unique URLs with special discount parameters that activate when customers click them. They're perfect for:
 
-1. Trigger: `checkout_started` where `cart_value >= 50` and `coupon_used == false`.
-2. Action: issue a 10% off code (single-use) valid for 24 hours.
-3. Guardrails: limit to 500 redemptions/day and exclude wholesale customers.
+- Email marketing campaigns
+- Social media promotions
+- Influencer partnerships
+- QR codes on packaging
+- SMS campaigns
 
-Document the rule in version control so product, finance, and engineering agree on scope.
+**Best for:** External marketing, targeted campaigns, tracking specific channels
 
-## 4) Connect discount delivery
+## Creating Your First Behavioural Trigger
 
-- Decide how the discount is applied:
-  - Generate a promo code and surface it in-app/onsite.
-  - Automatically inject a cart rule via your commerce backend.
-  - Send via email/SMS for abandoned cart journeys.
-- Ensure redemptions are trackable so you can measure lift vs. control.
+### Step 1: Install the App Embed
 
-## 5) Test before launch
+Before triggers can work, you need to install the app embed on your theme:
 
-- Reproduce the triggering events in staging and confirm:
-  - The rule fires only when conditions are met.
-  - Guardrails (caps, geo, eligibility) block non-qualifying sessions.
-  - The discount applies correctly and cannot be reused beyond limits.
-- Shadow-launch with a 0% discount or an internal audience first, then roll out broadly.
+1. Navigate to your Shopify admin
+2. Go to **Online Store → Themes**
+3. Click **Customize** on your active theme
+4. In the theme editor, look for **App embeds** in the left sidebar
+5. Enable **Behaviour Discounts**
+6. Click **Save**
 
-## Next steps
+### Step 2: Create a Trigger
 
-- Hardening rules and guardrails: see [Configuring rules](configuration.md).
-- Launching with observability and rollback: see [Rolling out safely](rollout.md).
+1. From the app home, click **Behavioural triggers** → **Create trigger**
+2. Give your trigger a name (e.g., "Exit Intent - 10% Off")
+3. Choose a **behaviour rule** (see [Trigger Types](./trigger-types.md) for details)
+4. Configure your **discount settings**:
+   - Product discounts (percentage, fixed amount, or free gift)
+   - Order discounts
+   - Shipping discounts
+5. Decide whether to show a popup or auto-apply the discount
+6. Set your trigger to **Active**
+
+### Step 3: Test Your Trigger
+
+1. Open your storefront in an incognito window
+2. Perform the behavior that triggers your discount (e.g., view products, wait on page, move cursor to exit)
+3. Verify the popup appears or discount applies as expected
+
+## Creating Your First Magic Link
+
+### Step 1: Choose a Template or Start Fresh
+
+Magic Links come with pre-built templates for common use cases:
+
+- **Email Welcome Series** - Reward new subscribers
+- **Abandoned Cart Recovery** - Win back lost sales
+- **Birthday Club** - Celebrate customer birthdays
+- **Klaviyo Spin to Win** - Integrate with gamification popups
+- **Or create your own custom campaign**
+
+### Step 2: Configure Your Magic Link
+
+1. From the app home, click **Magic links** → **Create magic link**
+2. Select a template or start from scratch
+3. Set your **URL parameters**:
+   - **Parameter name** (e.g., `welcome`, `birthday`, `spin`)
+   - **Parameter value** (e.g., `vip2024`, `win-x7k2m9p4`)
+   - Use unguessable values for security
+4. Configure your **discount settings** (same options as triggers)
+5. Optionally show a popup when the link is clicked
+6. Set status to **Active**
+
+### Step 3: Get Your Magic Link URL
+
+After creating your magic link, you'll get a URL like:
+
+```
+https://your-store.com?welcome=vip2024
+```
+
+Add this to your email campaigns, social media, or anywhere you want to offer a discount.
+
+### Step 4: Test Your Magic Link
+
+1. Open your magic link URL in an incognito window
+2. Verify the popup appears (if configured)
+3. Add products to cart
+4. Check that the discount applies at checkout
+
+## Understanding Discount Types
+
+### Product Discounts
+
+Apply discounts to specific products, collections, vendors, or product types:
+
+- **Percentage off** - e.g., 15% off
+- **Fixed amount off** - e.g., $5 off each item
+- **Free gift** - Automatically add free products to cart
+
+#### Minimum Requirements
+
+Set requirements customers must meet to qualify:
+
+- **Cart total** - e.g., "Spend $50 to get 10% off"
+- **Quantity** - e.g., "Buy 3+ items to get free gift"
+- **Exclude collections** - Don't count sale items toward minimums
+
+### Order Discounts
+
+Apply a discount to the entire cart subtotal:
+
+- **Percentage off** - e.g., 20% off entire order
+- **Fixed amount off** - e.g., $10 off order
+
+### Shipping Discounts
+
+Reduce or eliminate shipping costs:
+
+- **Percentage off** - e.g., 50% off shipping
+- **Fixed amount off** - e.g., $5 off shipping
+- **Free shipping** - 100% off shipping
+
+## Popup Customization
+
+Both triggers and magic links can show branded popups:
+
+1. Go to **Customize → Gift popup** or **Info popup**
+2. Customize:
+   - Background color
+   - Text color
+   - Border radius
+   - Overlay opacity
+3. Your popups will automatically match your brand
+
+## Key Features
+
+### Magic Link Priority
+
+When a customer has both a magic link and a behavioural trigger active, **magic links always take priority**. This prevents popup spam and respects the customer's choice to engage with your promotional link.
+
+### Auto-Add Free Gifts
+
+For free gift campaigns, you can:
+
+- **Auto-add** - Gifts automatically appear in cart when requirements are met
+- **Manual selection** - Show popup letting customer choose their gift
+- **Manual with popup** - Let customer choose from a limited selection
+
+### Countdown Timers
+
+Add urgency with countdown timers on popups:
+
+- Set duration in seconds
+- Customize the expired message
+- Timer resets per session
+
+## Best Practices
+
+### For Behavioural Triggers
+
+1. **Start conservative** - Don't trigger too easily (e.g., after 1 product view)
+2. **Use exit intent wisely** - Great for capturing abandoning visitors
+3. **Combine with requirements** - "Spend $50 to unlock 10% off"
+4. **Test in incognito** - Always verify trigger behavior
+5. **Monitor performance** - Check the analytics dashboard
+
+### For Magic Links
+
+1. **Use unguessable values** - Prevent unauthorized use (e.g., `win-x7k2m9p4` not `win`)
+2. **Create unique links** - One per campaign for better tracking
+3. **Test before sending** - Verify the link works and applies correctly
+4. **Set expiry dates** - Use discount start/end dates for limited offers
+5. **Track results** - Monitor clicks and conversions
+
+## Priority and Combining Discounts
+
+### Discount Priority
+
+1. **Magic links override triggers** - Active magic links suppress behavioural triggers
+2. **First trigger wins** - Only one behavioural trigger can be active per session
+3. **Shopify validation** - All discounts validated at checkout by Shopify Functions
+
+### Combining with Other Discounts
+
+Configure which discounts can combine:
+
+- Product discounts (e.g., automatic BOGO offers)
+- Order discounts (e.g., seasonal sales)
+- Shipping discounts (e.g., free shipping promotions)
+
+**Note:** Combining is subject to Shopify's discount stacking rules.
+
+## Next Steps
+
+- [Explore all trigger types](./trigger-types.md) and when to use them
+- [Set up your first campaign](./campaigns.md)
+- [Customize popup styling](./customization.md)
+- [Integrate with Klaviyo](./integrations.md)
+- [View analytics and insights](./analytics.md)
+
+## Need Help?
+
+- Check our [FAQ](./faq.md) for common questions
+- Review [troubleshooting tips](./troubleshooting.md)
+- Contact support at [your-support-email]
+
+---
+
+**Ready to reward your customers?** Start creating your first trigger or magic link today!
