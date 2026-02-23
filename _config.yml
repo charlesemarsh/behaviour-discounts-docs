@@ -5,6 +5,7 @@ search_enabled: true
 heading_anchors: true
 color_scheme: light
 
+permalink: pretty
 markdown: kramdown
 
 exclude:
