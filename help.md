@@ -49,6 +49,21 @@ Behaviour Discounts gates discounts behind magic links and behavioural triggers.
 - Acceptance writes the `behaviour_trigger_campaign` cart attribute and, if applicable, adds configured gifts.  
 - If a magic link is active, triggers stay suppressed to avoid stacking.
 
+## QR codes
+
+- Create branded QR codes that trigger a discount when scanned from packaging, flyers, in-store displays, or event materials.
+- Each QR code links to a Shopify Function discount (same types as magic links: Product, Order, or Shipping).
+- Choose a destination page (homepage, product, collection, cart, or custom path). The `qr` parameter is appended automatically.
+- Customise QR appearance: foreground/background colours, corner style (square or rounded), centre logo, and an optional frame with a call-to-action label.
+- Optional popup: show a branded message when the customer lands on your store after scanning.
+- Optional short URL: create a vanity redirect (e.g., `/go/scan`) so the link can be printed or shared alongside the QR code.
+- QR codes share priority with magic links — when active, behavioural triggers are suppressed.
+
+### Editing or disabling
+
+- Edit the destination, discount, popup, QR design, or short URL directly in the app.
+- Pause a campaign to stop new activations while keeping your stats. Delete removes the QR code, Shopify discount, and any associated URL redirect.
+
 ## Free gifts / free products
 
 - Discounts can include gift variants tagged `_gift_campaign`.  
@@ -57,32 +72,43 @@ Behaviour Discounts gates discounts behind magic links and behavioural triggers.
 
 ## Priority
 
-- Magic links have priority: when active, behavioural trigger popups and actions are suppressed so only the magic-link discount applies.
+- Magic links and QR codes share the same priority: when either is active, behavioural trigger popups and actions are suppressed so only the magic-link or QR code discount applies.
 
 ## Testing checklist
 
-- In a theme preview, load a campaign URL with the expected query param/value and confirm the popup (if enabled) and discount state.  
-- Check browser storage: `magic_link_discount` cookie and sessionStorage mirror are present.  
-- Add items to cart; verify the cart attribute (`magic_link_campaign` or `behaviour_trigger_campaign`) is written before checkout.  
-- For free gifts, confirm the correct variant(s) auto-add and remove if the discount deactivates.  
-- Trigger a behavioural rule (product view or time threshold) without a magic link; confirm the popup and cart attribute.  
-- Ensure triggers stay suppressed when a magic link is active.  
+- In a theme preview, load a campaign URL with the expected query param/value and confirm the popup (if enabled) and discount state.
+- Check browser storage: `magic_link_discount` cookie and sessionStorage mirror are present.
+- Add items to cart; verify the cart attribute (`magic_link_campaign` or `behaviour_trigger_campaign`) is written before checkout.
+- For free gifts, confirm the correct variant(s) auto-add and remove if the discount deactivates.
+- Trigger a behavioural rule (product view or time threshold) without a magic link; confirm the popup and cart attribute.
+- Ensure triggers stay suppressed when a magic link or QR code is active.
+- For QR codes, scan the generated code with a phone and confirm it redirects to the correct destination with the discount applied.
+- If a short URL is configured, visit it in a browser and confirm it redirects correctly.
+- Use the **Preview for testing** button on QR codes and magic links to force the popup without needing the campaign to be active.
 - Complete a test checkout and verify the correct discount/gift appears.
 
 ## Troubleshooting
 
-- **No popup or discount:** Check the theme embed is enabled and published.  
-- **Param not matching:** Ensure the shared URL includes the exact query pair and that the magic link is enabled.  
-- **Gifts not adding:** Confirm the gift variant is tagged `_gift_campaign` and the discount benefit is set to Free products with the right `autoAddGiftCount`.  
-- **Cart attribute missing:** Verify the customer accepted the popup (if required) and that the cart isn’t blocked by other scripts.  
-- **Triggers always firing:** Make sure a magic link isn’t active from a previous session; clear cookies/session or use an incognito window.
+- **No popup or discount:** Check the theme embed is enabled and published.
+- **Param not matching:** Ensure the shared URL includes the exact query pair and that the magic link is enabled.
+- **QR code not working:** Verify the QR code status is Active, not Draft or Paused. Scan the code and check the destination URL includes the `?qr=` parameter.
+- **Short URL not redirecting:** Confirm the redirect was created successfully (check for warnings on save). You can also verify in Shopify admin under Settings → Navigation.
+- **Short URL path already taken:** Each path must be unique across your store. Choose a different path or remove the existing redirect in Settings → Navigation.
+- **Gifts not adding:** Confirm the gift variant is tagged `_gift_campaign` and the discount benefit is set to Free products with the right `autoAddGiftCount`.
+- **Cart attribute missing:** Verify the customer accepted the popup (if required) and that the cart isn’t blocked by other scripts.
+- **Triggers always firing:** Make sure a magic link or QR code isn’t active from a previous session; clear cookies/session or use an incognito window.
 
 ## FAQ
 
-- **What discount types are supported?** Product (percentage/fixed/gift), Order (percentage/fixed with optional min subtotal/quantity), and Shipping (percentage/fixed/free), all powered by Shopify Functions.  
-- **Can I prevent stacking?** Yes. Magic links suppress behavioural triggers; within the discount, stacking rules are enforced by the Function configuration.  
-- **Where do I edit popup copy?** In the Behavioural triggers settings for each rule.  
+- **What discount types are supported?** Product (percentage/fixed/gift), Order (percentage/fixed with optional min subtotal/quantity), and Shipping (percentage/fixed/free), all powered by Shopify Functions.
+- **Can I prevent stacking?** Yes. Magic links and QR codes suppress behavioural triggers; within the discount, stacking rules are enforced by the Function configuration.
+- **Where do I edit popup copy?** In the magic link, QR code, or behavioural trigger settings for each campaign.
 - **How are discounts configured?** Metadata (benefit type, gifts, param/value) is stored in the Function configuration metafield and read at runtime.
+- **What's the difference between a magic link and a QR code?** Magic links use a customisable query parameter (e.g., `?ref=summer`) and are designed for digital sharing. QR codes always use the `qr` parameter with an auto-generated value and include a scannable QR image for print and physical media. Both support the same discount types, popups, and short URLs.
+- **Can I use the same short URL path for a magic link and a QR code?** No. Short URL paths must be unique across your entire store, regardless of whether they belong to a magic link or QR code.
+- **Can I use "qr" as a magic link parameter name?** No. The parameter name `qr` is reserved for QR codes. Choose a different name for your magic links (e.g., `ref`, `promo`, `campaign`).
+- **What happens if I delete a QR code or magic link with a short URL?** The Shopify URL redirect is automatically deleted along with the campaign and its associated discount.
+- **Can I pause a QR code without deleting it?** Yes. Pausing stops the discount from applying but preserves your stats and configuration. You can reactivate it later.
 
 ## Need help?
 
