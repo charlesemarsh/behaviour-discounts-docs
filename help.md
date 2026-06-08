@@ -4,7 +4,7 @@ title: Merchant Help
 nav_order: 2
 ---
 
-**English** · [Deutsch](/de/help/)
+**English** · [Deutsch](/de/help/) · [Français](/fr/help/)
 
 # Behaviour Discounts — Merchant Help
 

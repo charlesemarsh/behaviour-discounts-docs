@@ -5,7 +5,7 @@ nav_exclude: true
 permalink: /de/help/
 ---
 
-[English](/help/) · **Deutsch**
+[English](/help/) · **Deutsch** · [Français](/fr/help/)
 
 # Behaviour Discounts — Hilfe für Händler
 

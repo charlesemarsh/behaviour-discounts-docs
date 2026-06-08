@@ -5,7 +5,7 @@ nav_exclude: true
 permalink: /de/contact/
 ---
 
-[English](/contact/) · **Deutsch**
+[English](/contact/) · **Deutsch** · [Français](/fr/contact/)
 
 # Kontakt
 

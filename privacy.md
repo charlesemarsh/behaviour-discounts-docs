@@ -4,7 +4,7 @@ title: Privacy & Data Usage
 nav_order: 4
 ---
 
-**English** · [Deutsch](/de/privacy/)
+**English** · [Deutsch](/de/privacy/) · [Français](/fr/privacy/)
 
 # Privacy & Data Usage
 

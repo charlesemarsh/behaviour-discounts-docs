@@ -4,7 +4,7 @@ title: Behaviour Discounts
 nav_order: 1
 ---
 
-**English** · [Deutsch](/de/)
+**English** · [Deutsch](/de/) · [Français](/fr/)
 
 # Behaviour Discounts
 

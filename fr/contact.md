@@ -1,31 +1,32 @@
 ---
 layout: default
 title: Contact
-nav_order: 5
+nav_exclude: true
+permalink: /fr/contact/
 ---
 
-**English** · [Deutsch](/de/contact/) · [Français](/fr/contact/)
+[English](/contact/) · [Deutsch](/de/contact/) · **Français**
 
 # Contact
 
-Use this form to reach the Behaviour Discounts team.
+Utilisez ce formulaire pour joindre l'équipe Behaviour Discounts.
 
 <div class="contact-card">
   <form class="contact-form" action="https://formspree.io/f/xykgnwap" method="POST">
     <div class="contact-row">
-      <label for="name">Name</label>
+      <label for="name">Nom</label>
       <input id="name" name="name" type="text" required>
     </div>
     <div class="contact-row">
-      <label for="email">Email</label>
+      <label for="email">E-mail</label>
       <input id="email" name="_replyto" type="email" required>
     </div>
     <div class="contact-row">
-      <label for="message">How can we help?</label>
+      <label for="message">Comment pouvons-nous vous aider ?</label>
       <textarea id="message" name="message" rows="5" required></textarea>
     </div>
     <input type="hidden" name="_subject" value="Behaviour Discounts contact">
-    <button type="submit">Send</button>
+    <button type="submit">Envoyer</button>
   </form>
 </div>
 

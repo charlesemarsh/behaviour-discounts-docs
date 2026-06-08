@@ -5,7 +5,7 @@ nav_exclude: true
 permalink: /de/privacy/
 ---
 
-[English](/privacy/) · **Deutsch**
+[English](/privacy/) · **Deutsch** · [Français](/fr/privacy/)
 
 # Datenschutz & Datennutzung
 

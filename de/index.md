@@ -5,7 +5,7 @@ nav_exclude: true
 permalink: /de/
 ---
 
-[English](/) · **Deutsch**
+[English](/) · **Deutsch** · [Français](/fr/)
 
 # Behaviour Discounts
 
