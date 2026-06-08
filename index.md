@@ -4,6 +4,8 @@ title: Behaviour Discounts
 nav_order: 1
 ---
 
+**English** · [Deutsch](/de/)
+
 # Behaviour Discounts
 
 Behaviour Discounts helps you offer dynamic incentives based on what customers actually do like browse, engage, abandon, purchase, and return. Use it to steer user behaviour and win that conversion with targeted discounts, free shipping or loyalty boosts without blanket promotions.

@@ -4,6 +4,8 @@ title: Merchant Help
 nav_order: 2
 ---
 
+**English** · [Deutsch](/de/help/)
+
 # Behaviour Discounts — Merchant Help
 
 Behaviour Discounts gates discounts behind magic links and behavioural triggers. Merchants control when a discount applies, which cart attribute is set, and whether free gifts are auto-added.

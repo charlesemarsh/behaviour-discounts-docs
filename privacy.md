@@ -4,6 +4,8 @@ title: Privacy & Data Usage
 nav_order: 4
 ---
 
+**English** · [Deutsch](/de/privacy/)
+
 # Privacy & Data Usage
 
 How Behaviour Discounts handles merchant and shopper data. Adapt this to your own policies and jurisdictional requirements.
